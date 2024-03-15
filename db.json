@@ -1,0 +1,659 @@
+{
+  "users": [
+    {
+      "id": "42ed",
+      "username": "absalom",
+      "email": "absalomlihasi@gmail.com",
+      "password": "1234",
+      "phoneNumber": "0714022687",
+      "rank": "ADMIN"
+    },
+    {
+      "id": "e589",
+      "username": "betcy",
+      "email": "betcy@gmail.com",
+      "password": "1234",
+      "phoneNumber": "0714022687",
+      "rank": "CLIENT"
+    },
+    {
+      "id": "74c7",
+      "username": "paul",
+      "email": "paul@gmail.com",
+      "password": "1234",
+      "phoneNumber": "1234567890",
+      "rank": "CLIENT"
+    },
+    {
+      "id": "cffd",
+      "username": "morell",
+      "email": "morell@gmail.com",
+      "password": "1234",
+      "phoneNumber": "1234567890",
+      "rank": "CLIENT"
+    }
+  ],
+  "flights": [
+    {
+      "id": "2e44",
+      "origin": "kisumu",
+      "destination": "mombasa",
+      "departureDate": "2024-03-14",
+      "arrivalDate": "2024-03-22",
+      "departureTime": "12:00",
+      "arrivalTime": "19:00",
+      "aircraft": "airbus3",
+      "firstClassCost": "5000",
+      "businessClassCost": "3000",
+      "economyClassCost": "1000",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "8011",
+      "origin": "Los Angeles",
+      "destination": "nairobi",
+      "departureDate": "2024-03-15",
+      "arrivalDate": "2024-03-16",
+      "departureTime": "12:00",
+      "arrivalTime": "14:00",
+      "aircraft": "airbus1",
+      "firstClassCost": "5000",
+      "businessClassCost": "3000",
+      "economyClassCost": "1000",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "a52b",
+      "origin": "mombasa",
+      "destination": "kisumu",
+      "departureDate": "2024-03-15",
+      "arrivalDate": "2024-03-16",
+      "departureTime": "12:00",
+      "arrivalTime": "12:03",
+      "aircraft": "airbus1",
+      "firstClassCost": "3000",
+      "businessClassCost": "2000",
+      "economyClassCost": "1000",
+      "status": "ACTIVE"
+    }
+  ],
+  "bookedFlights": [
+    {
+      "id": "9ab2",
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "absalom",
+      "seats": "5D",
+      "cost": 5000,
+      "origin": "kisumu",
+      "destination": "mombasa",
+      "date": "2024-03-14",
+      "time": "12:00",
+      "aircraft": "airbus3",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": "2e44",
+      "status": "DUE"
+    }
+  ],
+  "cities": [
+    {
+      "id": "69d6",
+      "name": "nairobi"
+    },
+    {
+      "id": "4203",
+      "name": "kisumu"
+    },
+    {
+      "id": "d042",
+      "name": "mombasa"
+    },
+    {
+      "id": "f517",
+      "name": "nairobi"
+    },
+    {
+      "id": "9756",
+      "name": "johanessburg"
+    },
+    {
+      "id": "1138",
+      "name": "nakuru"
+    },
+    {
+      "id": "0e1b",
+      "name": "Los Angeles"
+    },
+    {
+      "id": "e439",
+      "name": "washington DC"
+    },
+    {
+      "id": "56ec",
+      "name": "accra"
+    }
+  ],
+  "aircrafts": [
+    {
+      "id": "5abd",
+      "name": "airbus3",
+      "businessClassCapacity": "20",
+      "economyClassCapacity": "20",
+      "firstClassCapacity": "20",
+      "firstClassSeats": [
+        {
+          "tag": "1A",
+          "occupied": false
+        },
+        {
+          "tag": "1B",
+          "occupied": true
+        },
+        {
+          "tag": "1C",
+          "occupied": false
+        },
+        {
+          "tag": "1D",
+          "occupied": false
+        },
+        {
+          "tag": "2A",
+          "occupied": false
+        },
+        {
+          "tag": "2B",
+          "occupied": false
+        },
+        {
+          "tag": "2C",
+          "occupied": false
+        },
+        {
+          "tag": "2D",
+          "occupied": false
+        },
+        {
+          "tag": "3A",
+          "occupied": false
+        },
+        {
+          "tag": "3B",
+          "occupied": false
+        },
+        {
+          "tag": "3C",
+          "occupied": false
+        },
+        {
+          "tag": "3D",
+          "occupied": false
+        },
+        {
+          "tag": "4A",
+          "occupied": false
+        },
+        {
+          "tag": "4B",
+          "occupied": false
+        },
+        {
+          "tag": "4C",
+          "occupied": false
+        },
+        {
+          "tag": "4D",
+          "occupied": false
+        },
+        {
+          "tag": "5A",
+          "occupied": false
+        },
+        {
+          "tag": "5B",
+          "occupied": false
+        },
+        {
+          "tag": "5C",
+          "occupied": false
+        },
+        {
+          "tag": "5D",
+          "occupied": true
+        }
+      ],
+      "businessClassSeats": [
+        {
+          "tag": "1E",
+          "occupied": true
+        },
+        {
+          "tag": "1F",
+          "occupied": true
+        },
+        {
+          "tag": "1G",
+          "occupied": false
+        },
+        {
+          "tag": "1H",
+          "occupied": false
+        },
+        {
+          "tag": "2E",
+          "occupied": false
+        },
+        {
+          "tag": "2F",
+          "occupied": false
+        },
+        {
+          "tag": "2G",
+          "occupied": false
+        },
+        {
+          "tag": "2H",
+          "occupied": false
+        },
+        {
+          "tag": "3E",
+          "occupied": true
+        },
+        {
+          "tag": "3F",
+          "occupied": true
+        },
+        {
+          "tag": "3G",
+          "occupied": false
+        },
+        {
+          "tag": "3H",
+          "occupied": true
+        },
+        {
+          "tag": "4E",
+          "occupied": false
+        },
+        {
+          "tag": "4F",
+          "occupied": false
+        },
+        {
+          "tag": "4G",
+          "occupied": false
+        },
+        {
+          "tag": "4H",
+          "occupied": false
+        },
+        {
+          "tag": "5E",
+          "occupied": false
+        },
+        {
+          "tag": "5F",
+          "occupied": false
+        },
+        {
+          "tag": "5G",
+          "occupied": false
+        },
+        {
+          "tag": "5H",
+          "occupied": false
+        }
+      ],
+      "economyClassSeats": [
+        {
+          "tag": "1I",
+          "occupied": false
+        },
+        {
+          "tag": "1J",
+          "occupied": false
+        },
+        {
+          "tag": "1K",
+          "occupied": false
+        },
+        {
+          "tag": "1L",
+          "occupied": false
+        },
+        {
+          "tag": "2I",
+          "occupied": false
+        },
+        {
+          "tag": "2J",
+          "occupied": false
+        },
+        {
+          "tag": "2K",
+          "occupied": false
+        },
+        {
+          "tag": "2L",
+          "occupied": false
+        },
+        {
+          "tag": "3I",
+          "occupied": false
+        },
+        {
+          "tag": "3J",
+          "occupied": false
+        },
+        {
+          "tag": "3K",
+          "occupied": false
+        },
+        {
+          "tag": "3L",
+          "occupied": false
+        },
+        {
+          "tag": "4I",
+          "occupied": false
+        },
+        {
+          "tag": "4J",
+          "occupied": false
+        },
+        {
+          "tag": "4K",
+          "occupied": false
+        },
+        {
+          "tag": "4L",
+          "occupied": false
+        },
+        {
+          "tag": "5I",
+          "occupied": false
+        },
+        {
+          "tag": "5J",
+          "occupied": false
+        },
+        {
+          "tag": "5K",
+          "occupied": false
+        },
+        {
+          "tag": "5L",
+          "occupied": false
+        }
+      ]
+    },
+    {
+      "id": "e66c",
+      "name": "airbus1",
+      "firstClassCapacity": "10",
+      "businessClassCapacity": "10",
+      "economyClassCapacity": "10",
+      "firstClassSeats": [
+        {
+          "tag": "1A",
+          "occupied": false
+        },
+        {
+          "tag": "1B",
+          "occupied": false
+        },
+        {
+          "tag": "1C",
+          "occupied": false
+        },
+        {
+          "tag": "1D",
+          "occupied": false
+        },
+        {
+          "tag": "2A",
+          "occupied": false
+        },
+        {
+          "tag": "2B",
+          "occupied": false
+        },
+        {
+          "tag": "2C",
+          "occupied": false
+        },
+        {
+          "tag": "2D",
+          "occupied": true
+        },
+        {
+          "tag": "3A",
+          "occupied": false
+        },
+        {
+          "tag": "3B",
+          "occupied": true
+        }
+      ],
+      "businessClassSeats": [
+        {
+          "tag": "1E",
+          "occupied": false
+        },
+        {
+          "tag": "1F",
+          "occupied": false
+        },
+        {
+          "tag": "1G",
+          "occupied": false
+        },
+        {
+          "tag": "1H",
+          "occupied": false
+        },
+        {
+          "tag": "2E",
+          "occupied": false
+        },
+        {
+          "tag": "2F",
+          "occupied": false
+        },
+        {
+          "tag": "2G",
+          "occupied": false
+        },
+        {
+          "tag": "2H",
+          "occupied": false
+        },
+        {
+          "tag": "3E",
+          "occupied": false
+        },
+        {
+          "tag": "3F",
+          "occupied": false
+        }
+      ],
+      "economyClassSeats": [
+        {
+          "tag": "1I",
+          "occupied": false
+        },
+        {
+          "tag": "1J",
+          "occupied": false
+        },
+        {
+          "tag": "1K",
+          "occupied": false
+        },
+        {
+          "tag": "1L",
+          "occupied": false
+        },
+        {
+          "tag": "2I",
+          "occupied": false
+        },
+        {
+          "tag": "2J",
+          "occupied": false
+        },
+        {
+          "tag": "2K",
+          "occupied": false
+        },
+        {
+          "tag": "2L",
+          "occupied": false
+        },
+        {
+          "tag": "3I",
+          "occupied": false
+        },
+        {
+          "tag": "3J",
+          "occupied": true
+        }
+      ]
+    },
+    {
+      "id": "4a92",
+      "name": "airbus2",
+      "firstClassCapacity": "10",
+      "businessClassCapacity": "10",
+      "economyClassCapacity": "10",
+      "firstClassSeats": [
+        {
+          "tag": "1A",
+          "occupied": false
+        },
+        {
+          "tag": "1B",
+          "occupied": false
+        },
+        {
+          "tag": "1C",
+          "occupied": false
+        },
+        {
+          "tag": "1D",
+          "occupied": false
+        },
+        {
+          "tag": "2A",
+          "occupied": false
+        },
+        {
+          "tag": "2B",
+          "occupied": false
+        },
+        {
+          "tag": "2C",
+          "occupied": false
+        },
+        {
+          "tag": "2D",
+          "occupied": false
+        },
+        {
+          "tag": "3A",
+          "occupied": false
+        },
+        {
+          "tag": "3B",
+          "occupied": false
+        }
+      ],
+      "businessClassSeats": [
+        {
+          "tag": "1E",
+          "occupied": false
+        },
+        {
+          "tag": "1F",
+          "occupied": false
+        },
+        {
+          "tag": "1G",
+          "occupied": false
+        },
+        {
+          "tag": "1H",
+          "occupied": false
+        },
+        {
+          "tag": "2E",
+          "occupied": false
+        },
+        {
+          "tag": "2F",
+          "occupied": false
+        },
+        {
+          "tag": "2G",
+          "occupied": false
+        },
+        {
+          "tag": "2H",
+          "occupied": false
+        },
+        {
+          "tag": "3E",
+          "occupied": false
+        },
+        {
+          "tag": "3F",
+          "occupied": false
+        }
+      ],
+      "economyClassSeats": [
+        {
+          "tag": "1I",
+          "occupied": false
+        },
+        {
+          "tag": "1J",
+          "occupied": false
+        },
+        {
+          "tag": "1K",
+          "occupied": false
+        },
+        {
+          "tag": "1L",
+          "occupied": false
+        },
+        {
+          "tag": "2I",
+          "occupied": false
+        },
+        {
+          "tag": "2J",
+          "occupied": false
+        },
+        {
+          "tag": "2K",
+          "occupied": false
+        },
+        {
+          "tag": "2L",
+          "occupied": false
+        },
+        {
+          "tag": "3I",
+          "occupied": false
+        },
+        {
+          "tag": "3J",
+          "occupied": false
+        }
+      ]
+    }
+  ]
+}
