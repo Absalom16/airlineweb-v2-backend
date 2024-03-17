@@ -1,15 +1,12 @@
 const express = require("express");
+const WebSocket = require("ws");
 const fs = require("fs").promises;
-const { webSocketServer } = require("./webSocket.js");
-
+const chokidar = require("chokidar");
 // const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 const PORT = 3000;
 const DB_FILE = "db.json";
-
-//start websocket server
-webSocketServer();
 
 app.use(express.json(), function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -19,6 +16,8 @@ app.use(express.json(), function (req, res, next) {
   );
   next();
 });
+
+const wss = new WebSocket.Server({ noServer: true });
 
 // Read data from db.json
 async function readData() {
@@ -39,9 +38,36 @@ async function writeData(data) {
   await fs.writeFile(DB_FILE, JSON.stringify(data, null, 2));
 }
 
+// WebSocket server logic
+wss.on("connection", (ws) => {
+  ws.on("message", (message) => {
+    console.log(`Received message: ${message}`);
+  });
+
+  ws.send("connected");
+});
+
 // Create HTTP server with Express
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+// Upgrade HTTP server to WebSocket server
+server.on("upgrade", (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, (ws) => {
+    wss.emit("connection", ws, request);
+  });
+});
+
+// Watch for changes to db.json and send updates to connected clients
+const watcher = chokidar.watch(DB_FILE);
+watcher.on("change", async (path) => {
+  console.log(`File ${path} has been changed`);
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send("db_change");
+    }
+  });
 });
 
 // RESTful API endpoints

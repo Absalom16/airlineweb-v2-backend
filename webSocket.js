@@ -2,7 +2,7 @@ function runWebSocketServer() {
   const WebSocket = require("ws");
   const fs = require("fs");
 
-  const wss = new WebSocket.Server({ port: 8080 });
+  const wss = new WebSocket.Server({ port: 3000 });
 
   //watch for changes to db.json and send updates to connected clients
   fs.watch("db.json", (eventType, filename) => {
