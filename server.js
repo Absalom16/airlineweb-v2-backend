@@ -1,12 +1,9 @@
 const express = require("express");
 const WebSocket = require("ws");
-const fs = require("fs").promises;
-const chokidar = require("chokidar");
-// const { v4: uuidv4 } = require("uuid");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const app = express();
 const PORT = 3000;
-const DB_FILE = "db.json";
 
 app.use(express.json(), function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -19,65 +16,71 @@ app.use(express.json(), function (req, res, next) {
 
 const wss = new WebSocket.Server({ noServer: true });
 
-// Read data from db.json
-async function readData() {
-  try {
-    const data = await fs.readFile(DB_FILE, "utf8");
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code === "ENOENT") {
-      // If the file doesn't exist, return an empty array
-      return [];
-    }
-    throw error;
-  }
-}
+// MongoDB connection
+const uri =
+  "mongodb+srv://absalomlihasi:N1XMqM4hiF19id8g@medica.7dueqrn.mongodb.net/?retryWrites=true&w=majority&appName=medica";
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+const db = client.db("airline2");
 
-// Write data to db.json
-async function writeData(data) {
-  await fs.writeFile(DB_FILE, JSON.stringify(data, null, 2));
-}
+client
+  .connect()
+  .then(() => {
+    console.log("Connected to MongoDB");
 
-// WebSocket server logic
-wss.on("connection", (ws) => {
-  ws.on("message", (message) => {
-    console.log(`Received message: ${message}`);
+    // WebSocket server logic
+    wss.on("connection", (ws) => {
+      ws.on("message", (message) => {
+        console.log(`Received message: ${message}`);
+      });
+
+      ws.send("connected");
+    });
+
+    // Create HTTP server with Express
+    const server = app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+
+    // Upgrade HTTP server to WebSocket server
+    server.on("upgrade", (request, socket, head) => {
+      wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.emit("connection", ws, request);
+      });
+    });
+
+    // Watch for changes in MongoDB collection and send updates to clients
+    const collection = db; //.collection("your_collection");
+    const changeStream = collection.watch();
+
+    changeStream.on("change", (change) => {
+      console.log("Change occurred:", change);
+      //   const message = JSON.stringify({ type: "change", data: change });
+      wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send("db_change");
+        }
+      });
+    });
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
   });
-
-  ws.send("connected");
-});
-
-// Create HTTP server with Express
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
-// Upgrade HTTP server to WebSocket server
-server.on("upgrade", (request, socket, head) => {
-  wss.handleUpgrade(request, socket, head, (ws) => {
-    wss.emit("connection", ws, request);
-  });
-});
-
-// Watch for changes to db.json and send updates to connected clients
-const watcher = chokidar.watch(DB_FILE);
-watcher.on("change", async (path) => {
-  console.log(`File ${path} has been changed`);
-  wss.clients.forEach((client) => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send("db_change");
-    }
-  });
-});
 
 // RESTful API endpoints
 
 // Get all users
 app.get("/users", async (req, res) => {
   try {
-    const data = await readData();
-    res.send(data.users);
+    const users = await db.collection("users").find().toArray();
+    res.json(users);
   } catch (error) {
+    console.error("Error fetching users:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -85,13 +88,11 @@ app.get("/users", async (req, res) => {
 // Add a new user
 app.post("/users", async (req, res) => {
   try {
-    const data = await readData();
-    const newItem = req.body;
-    newItem.id = data.users.length + 1;
-    data.users.push(newItem);
-    await writeData(data);
-    res.json(newItem);
+    const newUser = req.body;
+    const result = await db.collection("users").insertOne(newUser);
+    res.json(result);
   } catch (error) {
+    console.error("Error adding user:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -99,8 +100,8 @@ app.post("/users", async (req, res) => {
 // Get all cities
 app.get("/cities", async (req, res) => {
   try {
-    const data = await readData();
-    res.send(data.cities);
+    const cities = await db.collection("cities").find().toArray();
+    res.send(cities);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -109,12 +110,11 @@ app.get("/cities", async (req, res) => {
 // Add a new city
 app.post("/cities", async (req, res) => {
   try {
-    const data = await readData();
-    const newItem = req.body;
-    newItem.id = data.cities.length + 1;
-    data.cities.push(newItem);
-    await writeData(data);
-    res.json(newItem);
+    const newCity = req.body;
+    const id = Math.random();
+    newCity.id = id;
+    const result = await db.collection("cities").insertOne(newCity);
+    res.json(result);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -123,8 +123,8 @@ app.post("/cities", async (req, res) => {
 // Get all aircrafts
 app.get("/aircrafts", async (req, res) => {
   try {
-    const data = await readData();
-    res.send(data.aircrafts);
+    const aircrafts = await db.collection("aircrafts").find().toArray();
+    res.json(aircrafts);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -133,20 +133,35 @@ app.get("/aircrafts", async (req, res) => {
 // update aircrafts seats
 app.get("/aircrafts/:id/:updateData", async (req, res) => {
   try {
-    const data = await readData();
+    const collection = db.collection("aircrafts");
     const itemId = req.params.id;
     const updateData = JSON.parse(req.params.updateData);
-    const updateItem = data.aircrafts.filter((item) => item.id == itemId)[0];
+    const filter = { id: itemId };
+    let updateDocument;
 
     if (updateData.firstClassSeats) {
-      updateItem.firstClassSeats = updateData.firstClassSeats;
+      updateDocument = {
+        $set: {
+          firstClassSeats: updateData.firstClassSeats,
+        },
+      };
     } else if (updateData.businessClassSeats) {
-      updateItem.businessClassSeats = updateData.businessClassSeats;
+      updateDocument = {
+        $set: {
+          businessClassSeats: updateData.businessClassSeats,
+        },
+      };
     } else if (updateData.economyClassSeats) {
-      updateItem.economyClassSeats = updateData.economyClassSeats;
+      updateDocument = {
+        $set: {
+          economyClassSeats: updateData.economyClassSeats,
+        },
+      };
     }
-    await writeData(data);
-    res.json(updateItem);
+
+    const updatedResult = await collection.updateOne(filter, updateDocument);
+
+    res.json(updatedResult);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -155,12 +170,11 @@ app.get("/aircrafts/:id/:updateData", async (req, res) => {
 // Add a new aircraft
 app.post("/aircrafts", async (req, res) => {
   try {
-    const data = await readData();
-    const newItem = req.body;
-    newItem.id = data.aircrafts.length + 1;
-    data.aircrafts.push(newItem);
-    await writeData(data);
-    res.json(newItem);
+    const id = Math.random();
+    const newAircraft = req.body;
+    newAircraft.id = id;
+    const result = await db.collection("aircrafts").insertOne(newAircraft);
+    res.json(result);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -169,8 +183,8 @@ app.post("/aircrafts", async (req, res) => {
 // Get all flights
 app.get("/flights", async (req, res) => {
   try {
-    const data = await readData();
-    res.send(data.flights);
+    const flights = await db.collection("flights").find().toArray();
+    res.send(flights);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -179,13 +193,14 @@ app.get("/flights", async (req, res) => {
 // Add a new flight
 app.post("/flights", async (req, res) => {
   try {
-    const data = await readData();
-    const newItem = req.body;
-    newItem.id = data.flights.length + 1;
-    data.flights.push(newItem);
-    await writeData(data);
-    res.json(newItem);
+    const id = Math.random();
+    const newFlight = req.body;
+    newFlight.id = id;
+    const result = await db.collection("flights").insertOne(newFlight);
+    res.json(result);
+    console.log(id);
   } catch (error) {
+    console.log(error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -193,8 +208,8 @@ app.post("/flights", async (req, res) => {
 // Get booked Flights
 app.get("/bookedFlights", async (req, res) => {
   try {
-    const data = await readData();
-    res.send(data.bookedFlights);
+    const bookedFlights = await db.collection("bookedFlights").find().toArray();
+    res.send(bookedFlights);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -203,12 +218,11 @@ app.get("/bookedFlights", async (req, res) => {
 //book a flight
 app.post("/bookedFlights", async (req, res) => {
   try {
-    const data = await readData();
-    const newItem = req.body;
-    newItem.id = data.bookedFlights.length + 1;
-    data.bookedFlights.push(newItem);
-    await writeData(data);
-    res.json(newItem);
+    const id = Math.random();
+    const newBooking = req.body;
+    newBooking.id = id;
+    const result = await db.collection("bookedFlights").insertOne(newBooking);
+    res.json(result);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -217,13 +231,19 @@ app.post("/bookedFlights", async (req, res) => {
 //admin update flight
 app.get("/flights/:id/:status", async (req, res) => {
   try {
-    const data = await readData();
+    const collection = db.collection("flights");
     const itemId = req.params.id;
-    const status = req.params.status;
-    const updateData = data.flights.filter((item) => item.id == itemId);
-    updateData[0].status = status;
-    await writeData(data);
-    res.json(itemId);
+    const status = JSON.parse(req.params.status);
+    const filter = { id: itemId };
+    const updateDocument = {
+      $set: {
+        status: status.status,
+      },
+    };
+
+    const updatedResult = await collection.updateOne(filter, updateDocument);
+
+    res.json(updatedResult);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -232,33 +252,58 @@ app.get("/flights/:id/:status", async (req, res) => {
 //client update flight
 app.get("/bookedFlights/:id/:newData", async (req, res) => {
   try {
+    const collection = db.collection("bookedFlights");
+    const itemId = req.params.id;
     const updateData = JSON.parse(req.params.newData);
     const data = await readData();
-    const itemId = req.params.id;
-    const updatedItem = data.bookedFlights.filter(
-      (item) => item.id == itemId
-    )[0];
+    const filter = { id: itemId };
+    let updateDocument;
 
     if (updateData.type == "cancelFlight") {
-      updatedItem.status = updateData.status;
+      updateDocument = {
+        $set: {
+          status: updateData.status,
+        },
+      };
     } else if (updateData.type == "addPassenger") {
-      updatedItem.passengers = updateData.passengers;
-      updatedItem.seats = updateData.seats;
-      updatedItem.passengerQuantity = updateData.passengerQuantity;
+      updateDocument = {
+        $set: {
+          passengers: updateData.passengers,
+          seats: updateData.seats,
+          passengerQuantity: updateData.passengerQuantity,
+        },
+      };
     } else if (updateData.type == "changePassenger") {
-      updatedItem.passengers = updateData.passengers;
+      updateDocument = {
+        $set: {
+          passengers: updateData.passengers,
+        },
+      };
     } else if (updateData.type == "changeClass") {
-      updatedItem.selectedClass = updateData.selectedClass;
-      updatedItem.seats = updateData.seats;
+      updateDocument = {
+        $set: {
+          selectedClass: updateData.selectedClass,
+          seats: updateData.seats,
+        },
+      };
     } else if (updateData.type == "changeSeats") {
-      updatedItem.seats = updateData.seats;
+      updateDocument = {
+        $set: {
+          seats: updateData.seats,
+        },
+      };
     } else if (updateData.type == "deletePassenger") {
-      updatedItem.passengers = updateData.passengers;
-      updatedItem.seats = updateData.seats;
+      updateDocument = {
+        $set: {
+          passengers: updateData.passengers,
+          seats: updateData.seats,
+        },
+      };
     }
 
-    await writeData(data);
-    res.json(updatedItem);
+    const updatedResult = await collection.updateOne(filter, updateDocument);
+
+    res.json(updatedResult);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
