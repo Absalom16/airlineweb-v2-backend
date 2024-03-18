@@ -242,7 +242,7 @@ app.get("/bookedFlights/:id/:newData", async (req, res) => {
     if (updateData.type == "cancelFlight") {
       updatedItem.status = updateData.status;
     } else if (updateData.type == "addPassenger") {
-      updatedItem.passegers = updateData.passengers;
+      updatedItem.passengers = updateData.passengers;
       updatedItem.seats = updateData.seats;
       updatedItem.passengerQuantity = updateData.passengerQuantity;
     } else if (updateData.type == "changePassenger") {

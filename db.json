@@ -74,9 +74,9 @@
   "bookedFlights": [
     {
       "selectedClass": "first",
-      "passengerQuantity": 1,
-      "passengers": "betcy",
-      "seats": "2C",
+      "passengerQuantity": 3,
+      "passengers": "betcy,jessica",
+      "seats": "2C,2D,1B",
       "cost": 3000,
       "origin": "nairobi",
       "destination": "kisumu",
@@ -88,7 +88,8 @@
       "phoneNumber": "0714022687",
       "flightNumber": 1,
       "status": "DUE",
-      "id": 1
+      "id": 1,
+      "passegers": "betcy,tess"
     },
     {
       "selectedClass": "economy",
@@ -110,9 +111,9 @@
     },
     {
       "selectedClass": "first",
-      "passengerQuantity": 1,
+      "passengerQuantity": 2,
       "passengers": "betcy",
-      "seats": "2C",
+      "seats": "2C,2B",
       "cost": 3000,
       "origin": "nairobi",
       "destination": "kisumu",
@@ -124,13 +125,14 @@
       "phoneNumber": "0714022687",
       "flightNumber": 1,
       "status": "DUE",
-      "id": 3
+      "id": 3,
+      "passegers": "betcy,tess"
     },
     {
       "selectedClass": "first",
-      "passengerQuantity": 1,
+      "passengerQuantity": 2,
       "passengers": "betcy",
-      "seats": "2C",
+      "seats": "2C,3B",
       "cost": 3000,
       "origin": "nairobi",
       "destination": "kisumu",
@@ -142,13 +144,14 @@
       "phoneNumber": "0714022687",
       "flightNumber": 1,
       "status": "DUE",
-      "id": 4
+      "id": 4,
+      "passegers": "betcy,tess"
     },
     {
       "selectedClass": "first",
-      "passengerQuantity": 1,
-      "passengers": "betcy",
-      "seats": "2C",
+      "passengerQuantity": 2,
+      "passengers": "betcy,tess",
+      "seats": "2C,2A",
       "cost": 3000,
       "origin": "nairobi",
       "destination": "kisumu",
@@ -164,9 +167,9 @@
     },
     {
       "selectedClass": "first",
-      "passengerQuantity": 1,
-      "passengers": "betcy",
-      "seats": "2C",
+      "passengerQuantity": 2,
+      "passengers": "betcy,jertyu",
+      "seats": "2C,1A",
       "cost": 3000,
       "origin": "nairobi",
       "destination": "kisumu",
@@ -201,7 +204,7 @@
     {
       "selectedClass": "first",
       "passengerQuantity": 1,
-      "passengers": "betcy",
+      "passengers": "john",
       "seats": "2C",
       "cost": 3000,
       "origin": "nairobi",
@@ -546,11 +549,11 @@
       "firstClassSeats": [
         {
           "tag": "1A",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "1B",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "1C",
@@ -562,11 +565,11 @@
         },
         {
           "tag": "2A",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "2B",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "2C",
@@ -574,7 +577,7 @@
         },
         {
           "tag": "2D",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "3A",
@@ -582,7 +585,7 @@
         },
         {
           "tag": "3B",
-          "occupied": false
+          "occupied": true
         }
       ],
       "businessClassSeats": [
