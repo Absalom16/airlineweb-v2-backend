@@ -87,7 +87,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 1,
       "passegers": "betcy,tess"
     },
@@ -106,7 +106,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 2,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 2
     },
     {
@@ -124,7 +124,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 3,
       "passegers": "betcy,tess"
     },
@@ -143,7 +143,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 4,
       "passegers": "betcy,tess"
     },
@@ -216,7 +216,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 8
     },
     {
@@ -234,7 +234,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 9
     },
     {
@@ -254,6 +254,42 @@
       "flightNumber": 1,
       "status": "DUE",
       "id": 10
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "paul",
+      "seats": "1C",
+      "cost": 3000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 11
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "mitchelle",
+      "seats": "3A",
+      "cost": 3000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 12
     }
   ],
   "cities": [
@@ -553,11 +589,11 @@
         },
         {
           "tag": "1B",
-          "occupied": true
+          "occupied": false
         },
         {
           "tag": "1C",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "1D",
@@ -569,23 +605,23 @@
         },
         {
           "tag": "2B",
-          "occupied": true
-        },
-        {
-          "tag": "2C",
-          "occupied": true
-        },
-        {
-          "tag": "2D",
-          "occupied": true
-        },
-        {
-          "tag": "3A",
           "occupied": false
         },
         {
-          "tag": "3B",
+          "tag": "2C",
+          "occupied": false
+        },
+        {
+          "tag": "2D",
+          "occupied": false
+        },
+        {
+          "tag": "3A",
           "occupied": true
+        },
+        {
+          "tag": "3B",
+          "occupied": false
         }
       ],
       "businessClassSeats": [
@@ -1175,7 +1211,7 @@
         },
         {
           "tag": "8J",
-          "occupied": true
+          "occupied": false
         }
       ]
     },

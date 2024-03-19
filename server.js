@@ -55,15 +55,18 @@ client
     });
 
     // Watch for changes in MongoDB collection and send updates to clients
-    const collection = db; //.collection("your_collection");
-    const changeStream = collection.watch();
+    const changeStream = db.watch({ fullDocument: "updateLookup" });
 
     changeStream.on("change", (change) => {
-      console.log("Change occurred:", change);
-      //   const message = JSON.stringify({ type: "change", data: change });
+      // console.log("Change occurred:", change);
+      const payload = {
+        operation: change.operationType,
+        collection: change.ns.coll,
+      };
+      const message = JSON.stringify({ type: "db_change", data: payload });
       wss.clients.forEach((client) => {
         if (client.readyState === WebSocket.OPEN) {
-          client.send("db_change");
+          client.send(message);
         }
       });
     });
@@ -136,7 +139,7 @@ app.get("/aircrafts/:id/:updateData", async (req, res) => {
     const collection = db.collection("aircrafts");
     const itemId = req.params.id;
     const updateData = JSON.parse(req.params.updateData);
-    const filter = { id: itemId };
+    const filter = { id: Number(itemId) };
     let updateDocument;
 
     if (updateData.firstClassSeats) {
@@ -234,10 +237,10 @@ app.get("/flights/:id/:status", async (req, res) => {
     const collection = db.collection("flights");
     const itemId = req.params.id;
     const status = JSON.parse(req.params.status);
-    const filter = { id: itemId };
+    const filter = { id: Number(itemId) };
     const updateDocument = {
       $set: {
-        status: status.status,
+        status: status,
       },
     };
 
@@ -255,10 +258,10 @@ app.get("/bookedFlights/:id/:newData", async (req, res) => {
     const collection = db.collection("bookedFlights");
     const itemId = req.params.id;
     const updateData = JSON.parse(req.params.newData);
-    const data = await readData();
-    const filter = { id: itemId };
+    const filter = { id: Number(itemId) };
     let updateDocument;
 
+    console.log(updateData);
     if (updateData.type == "cancelFlight") {
       updateDocument = {
         $set: {
