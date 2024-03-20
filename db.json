@@ -162,7 +162,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 5
     },
     {
@@ -180,7 +180,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 6
     },
     {
@@ -198,7 +198,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 7
     },
     {
@@ -252,7 +252,7 @@
       "username": "betcy",
       "phoneNumber": "0714022687",
       "flightNumber": 1,
-      "status": "DUE",
+      "status": "CANCELLED",
       "id": 10
     },
     {
@@ -290,6 +290,150 @@
       "flightNumber": 1,
       "status": "DUE",
       "id": 12
+    },
+    {
+      "selectedClass": "business",
+      "passengerQuantity": 1,
+      "passengers": "asdfg",
+      "seats": "2H",
+      "cost": 2000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 13
+    },
+    {
+      "selectedClass": "economy",
+      "passengerQuantity": 1,
+      "passengers": "gty",
+      "seats": "3I",
+      "cost": 1000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 14
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "hjkk",
+      "seats": "3D",
+      "cost": 5000,
+      "origin": "mombasa",
+      "destination": "nairobi",
+      "date": "2024-03-19",
+      "time": "12:00",
+      "aircraft": "airbus4",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 2,
+      "status": "DUE",
+      "id": 15
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "lop",
+      "seats": "3B",
+      "cost": 3000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 16
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "sdfg",
+      "seats": "2C",
+      "cost": 3000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 17
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "asdfghj",
+      "seats": "2B",
+      "cost": 3000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 18
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "asdfghm",
+      "seats": "2D",
+      "cost": 3000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 19
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "asdfghjk",
+      "seats": "2C",
+      "cost": 3000,
+      "origin": "nairobi",
+      "destination": "kisumu",
+      "date": "2024-03-18",
+      "time": "12:00",
+      "aircraft": "airbus1",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 1,
+      "status": "DUE",
+      "id": 20
     }
   ],
   "cities": [
@@ -585,7 +729,7 @@
       "firstClassSeats": [
         {
           "tag": "1A",
-          "occupied": true
+          "occupied": false
         },
         {
           "tag": "1B",
@@ -601,11 +745,11 @@
         },
         {
           "tag": "2A",
-          "occupied": true
+          "occupied": false
         },
         {
           "tag": "2B",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "2C",
@@ -613,7 +757,7 @@
         },
         {
           "tag": "2D",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "3A",
@@ -621,7 +765,7 @@
         },
         {
           "tag": "3B",
-          "occupied": false
+          "occupied": true
         }
       ],
       "businessClassSeats": [
@@ -655,7 +799,7 @@
         },
         {
           "tag": "2H",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "3E",
@@ -701,7 +845,7 @@
         },
         {
           "tag": "3I",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "3J",
@@ -895,7 +1039,7 @@
         },
         {
           "tag": "3D",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "4A",

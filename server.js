@@ -201,7 +201,6 @@ app.post("/flights", async (req, res) => {
     newFlight.id = id;
     const result = await db.collection("flights").insertOne(newFlight);
     res.json(result);
-    console.log(id);
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
@@ -232,21 +231,44 @@ app.post("/bookedFlights", async (req, res) => {
 });
 
 //admin update flight
-app.get("/flights/:id/:status", async (req, res) => {
+app.get("/flights/:id/:newData", async (req, res) => {
   try {
     const collection = db.collection("flights");
+    const collection2 = db.collection("bookedFlights");
+    const collection3 = db.collection("aircrafts");
     const itemId = req.params.id;
-    const status = JSON.parse(req.params.status);
+    const updateData = JSON.parse(req.params.newData);
     const filter = { id: Number(itemId) };
     const updateDocument = {
       $set: {
-        status: status,
+        status: updateData.status,
       },
     };
 
+    const aircraftUpdateOperation = {
+      $set: {
+        "firstClassSeats.$[].occupied": false,
+        "businessClassSeats.$[].occupied": false,
+        "economyClassSeats.$[].occupied": false,
+      },
+    };
+
+    //update flights with given id
     const updatedResult = await collection.updateOne(filter, updateDocument);
 
-    res.json(updatedResult);
+    // Update the booked flights with the same flight number
+    const bookedFlightsResult = await collection2.updateMany(
+      { flightNumber: Number(itemId) },
+      updateDocument
+    );
+
+    //render all the aircraft seats as vacant
+    const aircraftResult = await collection3.updateOne(
+      { name: updateData.aircraft },
+      aircraftUpdateOperation
+    );
+
+    res.json(updatedResult, bookedFlightsResult, aircraftResult);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -261,7 +283,6 @@ app.get("/bookedFlights/:id/:newData", async (req, res) => {
     const filter = { id: Number(itemId) };
     let updateDocument;
 
-    console.log(updateData);
     if (updateData.type == "cancelFlight") {
       updateDocument = {
         $set: {
