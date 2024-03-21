@@ -5,6 +5,10 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 const app = express();
 const PORT = 3000;
 
+//variables to use while assigning ids
+const min = 100000;
+const max = 999999;
+
 app.use(express.json(), function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -114,7 +118,7 @@ app.get("/cities", async (req, res) => {
 app.post("/cities", async (req, res) => {
   try {
     const newCity = req.body;
-    const id = Math.random();
+    const id = Math.floor(Math.random() * (max - min + 1)) + 1;
     newCity.id = id;
     const result = await db.collection("cities").insertOne(newCity);
     res.json(result);
@@ -173,7 +177,7 @@ app.get("/aircrafts/:id/:updateData", async (req, res) => {
 // Add a new aircraft
 app.post("/aircrafts", async (req, res) => {
   try {
-    const id = Math.random();
+    const id = Math.floor(Math.random() * (max - min + 1)) + 1;
     const newAircraft = req.body;
     newAircraft.id = id;
     const result = await db.collection("aircrafts").insertOne(newAircraft);
@@ -196,7 +200,7 @@ app.get("/flights", async (req, res) => {
 // Add a new flight
 app.post("/flights", async (req, res) => {
   try {
-    const id = Math.random();
+    const id = Math.floor(Math.random() * (max - min + 1)) + 1;
     const newFlight = req.body;
     newFlight.id = id;
     const result = await db.collection("flights").insertOne(newFlight);
@@ -220,7 +224,7 @@ app.get("/bookedFlights", async (req, res) => {
 //book a flight
 app.post("/bookedFlights", async (req, res) => {
   try {
-    const id = Math.random();
+    const id = Math.floor(Math.random() * (max - min + 1)) + 1;
     const newBooking = req.body;
     newBooking.id = id;
     const result = await db.collection("bookedFlights").insertOne(newBooking);
