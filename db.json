@@ -69,6 +69,34 @@
       "economyClassCost": "2000",
       "status": "ACTIVE",
       "id": 2
+    },
+    {
+      "origin": "johanessburg",
+      "destination": "nakuru",
+      "departureDate": "2024-03-23",
+      "arrivalDate": "2024-03-24",
+      "departureTime": "12:34",
+      "arrivalTime": "23:45",
+      "aircraft": "airbus4",
+      "firstClassCost": "6000",
+      "businessClassCost": "5000",
+      "economyClassCost": "3000",
+      "status": "ACTIVE",
+      "id": 3
+    },
+    {
+      "origin": "johanessburg",
+      "destination": "washington DC",
+      "departureDate": "2024-03-23",
+      "arrivalDate": "2024-03-24",
+      "departureTime": "12:34",
+      "arrivalTime": "23:45",
+      "aircraft": "airbus4",
+      "firstClassCost": "20000",
+      "businessClassCost": "15000",
+      "economyClassCost": "10000",
+      "status": "ACTIVE",
+      "id": 4
     }
   ],
   "bookedFlights": [
@@ -434,6 +462,60 @@
       "flightNumber": 1,
       "status": "DUE",
       "id": 20
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "james",
+      "seats": "1A",
+      "cost": 6000,
+      "origin": "johanessburg",
+      "destination": "nakuru",
+      "date": "2024-03-23",
+      "time": "12:34",
+      "aircraft": "airbus4",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 3,
+      "status": "DUE",
+      "id": 21
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "jowie",
+      "seats": "6B",
+      "cost": 20000,
+      "origin": "johanessburg",
+      "destination": "washington DC",
+      "date": "2024-03-23",
+      "time": "12:34",
+      "aircraft": "airbus4",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 4,
+      "status": "DUE",
+      "id": 22
+    },
+    {
+      "selectedClass": "first",
+      "passengerQuantity": 1,
+      "passengers": "jason",
+      "seats": "8B",
+      "cost": 20000,
+      "origin": "johanessburg",
+      "destination": "washington DC",
+      "date": "2024-03-23",
+      "time": "12:34",
+      "aircraft": "airbus4",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 4,
+      "status": "DUE",
+      "id": 23
     }
   ],
   "cities": [
@@ -995,7 +1077,7 @@
       "firstClassSeats": [
         {
           "tag": "1A",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "1B",
@@ -1079,7 +1161,7 @@
         },
         {
           "tag": "6B",
-          "occupied": false
+          "occupied": true
         },
         {
           "tag": "6C",
@@ -1111,7 +1193,7 @@
         },
         {
           "tag": "8B",
-          "occupied": false
+          "occupied": true
         }
       ],
       "businessClassSeats": [

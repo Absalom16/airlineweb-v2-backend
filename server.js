@@ -299,6 +299,7 @@ app.get("/bookedFlights/:id/:newData", async (req, res) => {
           passengers: updateData.passengers,
           seats: updateData.seats,
           passengerQuantity: updateData.passengerQuantity,
+          cost: updateData.cost,
         },
       };
     } else if (updateData.type == "changePassenger") {
@@ -312,6 +313,7 @@ app.get("/bookedFlights/:id/:newData", async (req, res) => {
         $set: {
           selectedClass: updateData.selectedClass,
           seats: updateData.seats,
+          cost: updateData.cost,
         },
       };
     } else if (updateData.type == "changeSeats") {
@@ -325,6 +327,7 @@ app.get("/bookedFlights/:id/:newData", async (req, res) => {
         $set: {
           passengers: updateData.passengers,
           seats: updateData.seats,
+          cost: updateData.cost,
         },
       };
     }
