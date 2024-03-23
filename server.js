@@ -3,7 +3,7 @@ const WebSocket = require("ws");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const app = express();
-const PORT = 3000;
+const PORT = 5173;
 
 //variables to use while assigning ids
 const min = 100000;
