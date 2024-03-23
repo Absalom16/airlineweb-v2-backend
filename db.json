@@ -516,6 +516,24 @@
       "flightNumber": 4,
       "status": "DUE",
       "id": 23
+    },
+    {
+      "selectedClass": "business",
+      "passengerQuantity": 1,
+      "passengers": "rtyu",
+      "seats": "8F",
+      "cost": 5000,
+      "origin": "johanessburg",
+      "destination": "nakuru",
+      "date": "2024-03-23",
+      "time": "12:34",
+      "aircraft": "airbus4",
+      "email": "betcy@gmail.com",
+      "username": "betcy",
+      "phoneNumber": "0714022687",
+      "flightNumber": 3,
+      "status": "DUE",
+      "id": 24
     }
   ],
   "cities": [
@@ -1315,7 +1333,7 @@
         },
         {
           "tag": "8F",
-          "occupied": false
+          "occupied": true
         }
       ],
       "economyClassSeats": [
