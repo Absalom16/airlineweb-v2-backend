@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 
 const app = express();
 dotenv.config();
-const PORT = 5173;
+const PORT = process.env.PORT;
 
 //variables to use while assigning ids
 const min = 100000;
