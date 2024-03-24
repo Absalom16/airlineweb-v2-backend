@@ -1,8 +1,10 @@
 const express = require("express");
 const WebSocket = require("ws");
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const dotenv = require("dotenv");
 
 const app = express();
+dotenv.config();
 const PORT = 5173;
 
 //variables to use while assigning ids
@@ -21,8 +23,7 @@ app.use(express.json(), function (req, res, next) {
 const wss = new WebSocket.Server({ noServer: true });
 
 // MongoDB connection
-const uri =
-  "mongodb+srv://absalomlihasi:N1XMqM4hiF19id8g@medica.7dueqrn.mongodb.net/?retryWrites=true&w=majority&appName=medica";
+const uri = process.env.URI;
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -30,7 +31,7 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
-const db = client.db("airline2");
+const db = client.db(process.env.DB);
 
 client
   .connect()
