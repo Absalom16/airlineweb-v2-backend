@@ -252,9 +252,9 @@ app.get("/flights/:id/:newData", async (req, res) => {
 
     const aircraftUpdateOperation = {
       $set: {
-        "firstClassSeats.$[].occupied": false,
-        "businessClassSeats.$[].occupied": false,
-        "economyClassSeats.$[].occupied": false,
+        "firstClassSeats.$[seat].occupied": false,
+        "businessClassSeats.$[seat].occupied": false,
+        "economyClassSeats.$[seat].occupied": false,
       },
     };
 
@@ -267,10 +267,17 @@ app.get("/flights/:id/:newData", async (req, res) => {
       updateDocument
     );
 
+    const options = {
+      arrayFilters: [
+        { "seat.flightNumber": Number(itemId) }, // Filter seats by flight number
+      ],
+    };
+
     //render all the aircraft seats as vacant
     const aircraftResult = await collection3.updateOne(
       { name: updateData.aircraft },
-      aircraftUpdateOperation
+      aircraftUpdateOperation,
+      options
     );
 
     res.json(updatedResult, bookedFlightsResult, aircraftResult);
